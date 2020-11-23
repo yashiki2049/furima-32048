@@ -52,7 +52,7 @@
 
 - belongs_to :user
 
-## user_item テーブル
+## user_items テーブル
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
