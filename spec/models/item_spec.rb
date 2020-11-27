@@ -13,7 +13,7 @@ RSpec.describe Item, type: :model do
       end
     end
 
-    context '商品出品がでない時' do
+    context '商品出品ができない時' do
       it 'imageを１枚つけないと登録できないこと' do
         @item.image = nil
         @item.valid?
