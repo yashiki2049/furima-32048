@@ -66,7 +66,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include('Price Out of setting range')
     end
     it 'priceが半角数字以外だと登録できないこと' do
-      @item.price = 'sasada'
+      @item.price = 'aaaaa'
       @item.valid?
       expect(@item.errors.full_messages).to include('Price Out of setting range')
     end
