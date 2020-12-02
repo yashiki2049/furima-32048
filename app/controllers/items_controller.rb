@@ -1,9 +1,9 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show, :index]
   before_action :move_to_index_soldout, only: [:edit]
   before_action :move_to_index, only: [:edit]
-
+  
   def index
     @items = Item.includes(:user).order('created_at DESC')
   end
@@ -37,13 +37,12 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item = Item.find(params[:id])
-    item.destroy
+    @item.destroy
     redirect_to root_path
   end
 
   private
-
+  
   def item_params
     params.require(:item).permit(:image, :name, :info, :category_id, :status_id, :shipping_burden_id, :prefecture_id, :shipping_day_id, :price).merge(user_id: current_user.id)
   end
@@ -54,11 +53,15 @@ class ItemsController < ApplicationController
 
   def move_to_index_soldout
     @item = Item.find(params[:id])
-    redirect_to action: :index unless @item.user_item.blank?
+    unless @item.user_item.blank?
+    redirect_to action: :index
+    end
   end
 
   def move_to_index
     @item = Item.find(params[:id])
-    redirect_to action: :index unless user_signed_in? && current_user.id == @item.user_id
+    unless user_signed_in? && current_user.id == @item.user_id
+    redirect_to action: :index
+    end
   end
 end
