@@ -17,7 +17,7 @@
 
 - has_many :items
 - has_many :user_items
-- has_one :item_purchases
+- has_one :address
 
 ## items テーブル
 
@@ -38,12 +38,11 @@
 - belongs_to :user
 - has_one :user_item
 
-## item_purchases テーブル
+## address テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
 | postal_code   | string     | null: false                    |
-| prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
 | address       | string     | null: false                    |
 | building      | string     |                                |
@@ -64,4 +63,4 @@
 
 - belongs_to :item
 - belongs_to :user
-- has_one :item_purchases
+- has_one :address
