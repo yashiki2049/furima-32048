@@ -1,4 +1,3 @@
 class Address < ApplicationRecord
-  belongs_to :user
-  belongs_to :user_items
+  belongs_to :user_item
 end
