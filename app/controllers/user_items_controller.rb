@@ -1,4 +1,7 @@
 class UserItemsController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
+  before_action :move_to_index, only: [:index]
+
    def index
     @item = Item.find(params[:item_id])
     @item_purchase = ItemPurchase.new
@@ -31,4 +34,10 @@ class UserItemsController < ApplicationController
     )
   end
 
+  def move_to_index
+    binding.pry
+     @item = Item.find(params[:item_id])
+     redirect_to root_path unless current_user.id != @item.user_id
+   end
+   
 end
