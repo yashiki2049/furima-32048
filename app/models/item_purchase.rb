@@ -17,7 +17,7 @@ class ItemPurchase
     validates :prefecture_id, numericality: { other_than: 0, message: 'Select' }
     validates :city
     validates :block
-    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'Input only number' }
+    validates :phone_number, format: { with: /\A\d{1,11}\z/, message: 'Input only number' }
     validates :token
   end
 
