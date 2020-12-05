@@ -9,7 +9,8 @@ class ItemPurchase
                 :phone_number,
                 :user_item_id,
                 :user_id,
-                :item_id
+                :item_id,
+                :token
 
   with_options presence: true do
     validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: 'Input correctly' }
@@ -17,6 +18,7 @@ class ItemPurchase
     validates :city
     validates :block
     validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'Input only number' }
+    validates :token
   end
 
   def save
