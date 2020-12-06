@@ -1,8 +1,8 @@
 class UserItemsController < ApplicationController
+  before_action :set_item, only: [:index, :create]
   before_action :authenticate_user!, only: [:index]
   before_action :move_to_index_soldout, only: [:index]
   before_action :move_to_index, only: [:index]
-  before_action :set_item, only: [:index, :create]
 
    def index
     @item_purchase = ItemPurchase.new
@@ -39,13 +39,11 @@ class UserItemsController < ApplicationController
   end
 
   def move_to_index_soldout
-    @item = Item.find(params[:item_id])
     redirect_to root_path unless @item.user_item.blank?
   end
 
   def move_to_index
-     @item = Item.find(params[:item_id])
-     redirect_to root_path unless current_user.id != @item.user_id
+     redirect_to root_path if current_user.id == @item.user_id
    end
 
 end
