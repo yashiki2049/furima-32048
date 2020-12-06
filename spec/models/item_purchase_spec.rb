@@ -72,13 +72,13 @@ RSpec.describe ItemPurchase, type: :model do
     end
 
     it 'user_idがないと保存できないこと' do
-      @item_purchase.user_id = ""
+      @item_purchase.user_id = ''
       @item_purchase.valid?
       expect(@item_purchase.errors.full_messages).to include("User can't be blank")
     end
 
     it 'item_idがないと保存できないこと' do
-      @item_purchase.item_id = ""
+      @item_purchase.item_id = ''
       @item_purchase.valid?
       expect(@item_purchase.errors.full_messages).to include("Item can't be blank")
     end
