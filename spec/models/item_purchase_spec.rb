@@ -9,6 +9,11 @@ RSpec.describe ItemPurchase, type: :model do
     it "すべての値が正しく入力されていれば商品購入・情報の保存ができること" do
       expect(@item_purchase).to be_valid
     end
+
+    it "buildingが空でも商品購入・情報の保存ができること" do
+      @item_purchase.building = ""
+      expect(@item_purchase).to be_valid
+    end
   end
 
   context '商品購入ができない時' do
