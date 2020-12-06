@@ -18,6 +18,8 @@ class ItemPurchase
     validates :city
     validates :block
     validates :phone_number, format: { with: /\A\d{1,11}\z/, message: 'Input only number' }
+    validates :user_id
+    validates :item_id
   end
 
   def save
