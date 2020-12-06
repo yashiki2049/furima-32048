@@ -35,6 +35,12 @@ RSpec.describe ItemPurchase, type: :model do
       expect(@item_purchase.errors.full_messages).to include('Prefecture Select')
     end
 
+    it 'prefecture_idが空だと保存できないこと' do
+      @item_purchase.prefecture_id = ""
+      @item_purchase.valid?
+      expect(@item_purchase.errors.full_messages).to include("Prefecture can't be blank")
+    end
+
     it 'cityが空だと保存できないこと' do
       @item_purchase.city = ''
       @item_purchase.valid?
