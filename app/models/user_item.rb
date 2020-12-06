@@ -1,5 +1,5 @@
-  class UserItem < ApplicationRecord
-    belongs_to :item
-    belongs_to :user
-    has_one :address
-  end
+class UserItem < ApplicationRecord
+  belongs_to :item
+  belongs_to :user
+  has_one :address
+end
