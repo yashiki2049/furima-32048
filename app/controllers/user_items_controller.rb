@@ -1,4 +1,5 @@
 class UserItemsController < ApplicationController
+  before_action :basic_auth
   before_action :set_item, only: [:index, :create]
   before_action :authenticate_user!, only: [:index]
   before_action :move_to_index_soldout, only: [:index]
@@ -20,6 +21,12 @@ class UserItemsController < ApplicationController
   end
 
   private
+
+  def basic_auth
+    authenticate_or_request_with_http_basic do |username, password|
+      username == ENV["BASIC_AUTH_USER"] && password == ENV["BASIC_AUTH_PASSWORD"]
+    end
+  end
 
   def purchase_params
     params.require(:item_purchase).permit(:postal_code, :prefecture_id, :city, :block, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
