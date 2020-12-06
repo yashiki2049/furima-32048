@@ -6,7 +6,6 @@ class ItemPurchase
                 :block,
                 :building,
                 :phone_number,
-                :user_item_id,
                 :user_id,
                 :item_id,
                 :token
