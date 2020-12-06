@@ -2,22 +2,21 @@ class UserItemsController < ApplicationController
   before_action :authenticate_user!, only: [:index]
   before_action :move_to_index_soldout, only: [:index]
   before_action :move_to_index, only: [:index]
+  before_action :set_item, only: [:index, :create]
 
    def index
-    @item = Item.find(params[:item_id])
     @item_purchase = ItemPurchase.new
    end
 
    def create
-      @item = Item.find(params[:item_id])
-      @item_purchase = ItemPurchase.new(purchase_params)
-      if @item_purchase.valid?
-        pay_item
-        @item_purchase.save
-        redirect_to root_path
-      else
-        render :index 
-      end
+    @item_purchase = ItemPurchase.new(purchase_params)
+    if @item_purchase.valid?
+      pay_item
+      @item_purchase.save
+      redirect_to root_path
+    else
+      render :index
+    end
    end
 
    private
@@ -33,6 +32,10 @@ class UserItemsController < ApplicationController
       card: params[:token],
       currency: 'jpy'
     )
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 
   def move_to_index_soldout
