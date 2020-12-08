@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :basic_auth
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :basic_auth #ベーシック認証
+  before_action :set_item, only: [:show, :edit, :update, :destroy] 
   before_action :authenticate_user!, except: [:show, :index]
   before_action :move_to_index_soldout, only: [:edit]
   before_action :move_to_index, only: [:edit, :destroy]
@@ -58,13 +58,13 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def move_to_index_soldout
-    @item = Item.find(params[:id])
-    redirect_to action: :index unless @item.user_item.blank?
+  def move_to_index_soldout #売却済みの商品の編集ページには遷移できない
+    # @item = Item.find(params[:id]) set_itemで取得済
+    redirect_to root_path unless @item.user_item.blank?
   end
 
-  def move_to_index
-    @item = Item.find(params[:id])
-    redirect_to action: :index unless user_signed_in? && current_user.id == @item.user_id
+  def move_to_index #編集ページには出品者以外遷移できない
+    # @item = Item.find(params[:id])  set_itemで取得済
+    redirect_to root_path unless current_user.id == @item.user_id
   end
 end
