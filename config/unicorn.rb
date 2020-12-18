@@ -11,7 +11,7 @@ working_directory app_path # 「current」を指定
 pid "#{app_path}/tmp/pids/unicorn.pid"  # 「shared」の中を参照するよう変更
 
 #ポート番号を指定
-listen "#{app_path}/tmp/sockets/unicorn.sock"  # 「shared」の中を参照するよう変更
+listen 3000
 
 #エラーのログを記録するファイルを指定
 stderr_path "#{app_path}/log/unicorn.stderr.log"  # 「shared」の中を参照するよう変更
