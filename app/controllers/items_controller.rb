@@ -44,12 +44,6 @@ class ItemsController < ApplicationController
 
   private
 
-  def basic_auth
-    authenticate_or_request_with_http_basic do |username, password|
-      username == ENV["BASIC_AUTH_USER"] && password == ENV["BASIC_AUTH_PASSWORD"]
-    end
-  end
-
   def item_params
     params.require(:item).permit(:image, :name, :info, :category_id, :status_id, :shipping_burden_id, :prefecture_id, :shipping_day_id, :price).merge(user_id: current_user.id)
   end

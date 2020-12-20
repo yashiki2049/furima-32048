@@ -10,6 +10,7 @@ class UserItemsController < ApplicationController
   end
 
   def create
+    binding.pry
     @item_purchase = ItemPurchase.new(purchase_params)
     if @item_purchase.valid?
       pay_item
@@ -21,12 +22,6 @@ class UserItemsController < ApplicationController
   end
 
   private
-
-  def basic_auth
-    authenticate_or_request_with_http_basic do |username, password|
-      username == ENV["BASIC_AUTH_USER"] && password == ENV["BASIC_AUTH_PASSWORD"]
-    end
-  end
 
   def purchase_params
     params.require(:item_purchase).permit(:postal_code, :prefecture_id, :city, :block, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
